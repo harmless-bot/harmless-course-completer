@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚽 Skibidi AutoPilot 3000</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    @keyframes rainbowGlow {
+      0% { border-color: #ff0055; box-shadow: 0 0 15px rgba(255, 0, 85, 0.4); }
+      25% { border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
+      50% { border-color: #06b6d4; box-shadow: 0 0 15px rgba(6, 182, 212, 0.4); }
+      75% { border-color: #22c55e; box-shadow: 0 0 15px rgba(34, 197, 94, 0.4); }
+      100% { border-color: #ff0055; box-shadow: 0 0 15px rgba(255, 0, 85, 0.4); }
+    }
+
+    @keyframes textRainbow {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    @keyframes toiletWobble {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-6deg) scale(1.05); }
+      75% { transform: rotate(6deg) scale(1.05); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.03); opacity: 1; filter: drop-shadow(0 0 12px #22c55e); }
+    }
+
+    body {
+      font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, cursive, sans-serif;
+      width: 410px;
+      padding: 14px;
+      background: radial-gradient(circle at 50% 10%, #1a0826 0%, #080511 60%, #030206 100%);
+      color: #f8fafc;
+      overflow-x: hidden;
+      border: 3px solid #a855f7;
+      border-radius: 16px;
+      animation: rainbowGlow 6s linear infinite;
+    }
+
+    /* Top Banner Graphic */
+    .skibidi-hero {
+      position: relative;
+      width: 100%;
+      height: 145px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      border: 2px dashed #e11d48;
+      box-shadow: 0 0 20px rgba(225, 29, 72, 0.5);
+      background: #000;
+    }
+    .skibidi-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+      filter: saturate(1.4) contrast(1.1);
+      transition: transform 0.3s ease;
+    }
+    .skibidi-hero:hover img {
+      transform: scale(1.08) rotate(1deg);
+    }
+    .skibidi-hero-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid #22c55e;
+      color: #4ade80;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+    .skibidi-hero-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, transparent 100%);
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #fde047;
+      text-shadow: 0 0 8px rgba(0,0,0,0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px dashed rgba(236, 72, 153, 0.4);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 2px solid #ec4899;
+      box-shadow: 0 0 12px #ec4899;
+      animation: toiletWobble 3s infinite ease-in-out;
+      object-fit: cover;
+    }
+    .brand-text h3 {
+      font-size: 15px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #f43f5e, #fb923c, #facc15, #4ade80, #38bdf8, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.3px;
+      animation: textRainbow 4s linear infinite;
+      text-shadow: 0 0 12px rgba(244, 63, 94, 0.3);
+    }
+    .author-tag {
+      font-size: 10px;
+      color: #cbd5e1;
+      margin-top: 2px;
+    }
+    .author-tag a {
+      color: #38bdf8;
+      text-decoration: underline wavy #f43f5e;
+      font-weight: 700;
+    }
+    .version-pill {
+      font-size: 10px;
+      background: linear-gradient(135deg, #f43f5e, #9333ea);
+      border: 1px solid #fbcfe8;
+      color: #ffffff;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 10px rgba(244, 63, 94, 0.6);
+      transform: rotate(3deg);
+    }
+
+    /* Platforms Banner */
+    .platforms-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(90deg, rgba(236, 72, 153, 0.2), rgba(59, 130, 246, 0.2));
+      border: 1px solid rgba(236, 72, 153, 0.4);
+      border-radius: 8px;
+      padding: 6px 10px;
+      margin-bottom: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fbcfe8;
+    }
+    .platforms-tags {
+      display: flex;
+      gap: 6px;
+    }
+    .platform-tag {
+      background: #000;
+      border: 1px solid #facc15;
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fde047;
+      box-shadow: 0 0 6px rgba(250, 204, 21, 0.3);
+    }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      background: #0f0a1c;
+      padding: 4px;
+      border-radius: 10px;
+      gap: 4px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 7px 4px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #94a3b8;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .tab-btn:hover {
+      color: #fde047;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+      color: #ffffff;
+      box-shadow: 0 2px 12px rgba(236, 72, 153, 0.6);
+      transform: scale(1.02);
+    }
+
+    /* Panes */
+    .tab-pane {
+      display: none;
+    }
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(22, 16, 38, 0.85);
+      border: 1.5px solid rgba(168, 85, 247, 0.3);
+      border-radius: 12px;
+      padding: 11px 13px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      border-color: #ec4899;
+      box-shadow: 0 0 12px rgba(236, 72, 153, 0.3);
+    }
+    .card-title {
+      font-size: 11px;
+      font-weight: 900;
+      color: #f43f5e;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-subtitle {
+      font-size: 10px;
+      color: #94a3b8;
+      margin-top: -4px;
+      margin-bottom: 8px;
+    }
+
+    /* Row & Toggles */
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .row:last-child {
+      margin-bottom: 0;
+    }
+    .row label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .row .desc {
+      font-size: 9.5px;
+      color: #a855f7;
+      display: block;
+      font-weight: normal;
+    }
+
+    /* Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #2e1c45;
+      transition: .25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border-radius: 20px;
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+    }
+    .slider:before {
+      position: absolute;
+      content: "🚽";
+      font-size: 12px;
+      line-height: 14px;
+      text-align: center;
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      bottom: 2px;
+      background-color: #fff;
+      transition: .25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    input:checked + .slider {
+      background: linear-gradient(135deg, #10b981, #06b6d4);
+      border-color: #34d399;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+    }
+    input:checked + .slider:before {
+      transform: translateX(19px) rotate(360deg);
+    }
+    input.switch-amber:checked + .slider {
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      border-color: #fbbf24;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.7);
+    }
+
+    /* Speed Control */
+    .speed-slider-container {
+      margin-top: 10px;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .speed-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .speed-val {
+      font-weight: 900;
+      color: #fde047;
+      background: rgba(234, 179, 8, 0.2);
+      border: 1px solid #facc15;
+      padding: 2px 9px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(250, 204, 21, 0.4);
+      font-size: 12px;
+    }
+    input[type=range] {
+      width: 100%;
+      height: 6px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #10b981, #f59e0b, #ef4444);
+      outline: none;
+      -webkit-appearance: none;
+      margin-bottom: 10px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #facc15;
+      border: 2px solid #000;
+      cursor: pointer;
+      box-shadow: 0 0 10px #facc15;
+      transition: transform 0.1s ease;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+    .speed-presets {
+      display: flex;
+      gap: 4px;
+    }
+    .speed-btn {
+      flex: 1;
+      padding: 5px 0;
+      background: #1b122c;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      color: #cbd5e1;
+      font-size: 10.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+    .speed-btn:hover {
+      background: #361a5e;
+      color: #fff;
+    }
+    .speed-btn.active {
+      background: linear-gradient(135deg, #f43f5e, #a855f7);
+      color: #fff;
+      border-color: #f43f5e;
+      box-shadow: 0 0 10px rgba(244, 63, 94, 0.5);
+    }
+
+    /* Select Dropdowns */
+    select {
+      width: 100%;
+      background: #18112a;
+      border: 1.5px solid rgba(168, 85, 247, 0.4);
+      border-radius: 8px;
+      color: #fde047;
+      padding: 6px 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      outline: none;
+      margin-top: 4px;
+      font-family: inherit;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    select:focus {
+      border-color: #ec4899;
+      box-shadow: 0 0 8px rgba(236, 72, 153, 0.5);
+    }
+
+    /* API Input Group */
+    .input-group {
+      margin-top: 8px;
+    }
+    .input-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #cbd5e1;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .input-wrapper input {
+      width: 100%;
+      background: #18112a;
+      border: 1.5px solid rgba(168, 85, 247, 0.4);
+      border-radius: 8px;
+      color: #f1f5f9;
+      padding: 6px 30px 6px 8px;
+      font-size: 11px;
+      font-family: monospace;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .input-wrapper input:focus {
+      border-color: #f43f5e;
+      box-shadow: 0 0 8px rgba(244, 63, 94, 0.5);
+    }
+    .toggle-visibility {
+      position: absolute;
+      right: 6px;
+      background: none;
+      border: none;
+      color: #cbd5e1;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 2px 4px;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .stat-box {
+      background: rgba(22, 16, 38, 0.85);
+      border: 1.5px solid #ec4899;
+      border-radius: 10px;
+      padding: 8px 6px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(236, 72, 153, 0.2);
+    }
+    .stat-number {
+      font-size: 19px;
+      font-weight: 900;
+      color: #facc15;
+      text-shadow: 0 0 8px rgba(250, 204, 21, 0.5);
+    }
+    .stat-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #cbd5e1;
+      margin-top: 2px;
+    }
+
+    /* Activity Logs */
+    .log-container {
+      background: #090611;
+      border: 1.5px solid rgba(168, 85, 247, 0.3);
+      border-radius: 8px;
+      height: 135px;
+      overflow-y: auto;
+      padding: 8px;
+      font-family: monospace;
+      font-size: 10.5px;
+      color: #cbd5e1;
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 4px;
+    }
+    .log-entry {
+      line-height: 1.35;
+    }
+    .log-time {
+      color: #f43f5e;
+      font-weight: 700;
+      margin-right: 4px;
+    }
+    .clear-log-btn {
+      margin-top: 6px;
+      width: 100%;
+      background: #1d1230;
+      border: 1px solid rgba(236, 72, 153, 0.4);
+      border-radius: 6px;
+      color: #cbd5e1;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 6px 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .clear-log-btn:hover {
+      background: #ec4899;
+      color: #fff;
+    }
+
+    /* Soundboard / Meme Corner */
+    .soundboard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .sound-btn {
+      background: linear-gradient(135deg, #1f1437, #3b1d60);
+      border: 1px solid #a855f7;
+      color: #fde047;
+      border-radius: 8px;
+      padding: 8px 6px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-family: inherit;
+    }
+    .sound-btn:hover {
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      color: #fff;
+      transform: scale(1.03);
+      box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+    }
+    .sound-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Meme Gallery Wall */
+    .meme-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .meme-thumb {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid #ec4899;
+      height: 80px;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .meme-thumb:hover {
+      transform: scale(1.05) rotate(2deg);
+      border-color: #fde047;
+      box-shadow: 0 0 10px #fde047;
+    }
+    .meme-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Guide text */
+    .guide-box {
+      font-size: 11.5px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+    .guide-box ol {
+      padding-left: 16px;
+      margin-top: 6px;
+    }
+    .guide-box li {
+      margin-bottom: 6px;
+    }
+    .hotkey-badge {
+      display: inline-block;
+      background: #2e1c45;
+      color: #fde047;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 11px;
+      border: 1px solid #facc15;
+      font-weight: bold;
+    }
+    .footer-watermark {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 10px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Skibidi Hero Banner -->
+  <div class="skibidi-hero">
+    <img src="assets/skibidi_toilet.jpg" alt="Skibidi Rizzler Meme">
+    <span class="skibidi-hero-badge">🔥 100% NO CAP IN OHIO</span>
+    <div class="skibidi-hero-caption">
+      <span>🚽 SKIBIDI COURSE MOGGER</span>
+      <span>MAX RIZZ ACTIVATED 💀</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="brand">
+      <img src="icons/icon128.png" alt="Skibidi Logo" class="brand-icon">
+      <div class="brand-text">
+        <h3>🚽 Skibidi AutoPilot</h3>
+        <div class="author-tag">by GigaChad <b>Divyanshu Rai</b> (<a href="https://github.com/harmless-bot" target="_blank">@harmless-bot</a>)</div>
+      </div>
+    </div>
+    <span class="version-pill">LVL 10 GYATT</span>
+  </div>
+
+  <!-- Dual Platform Banner -->
+  <div class="platforms-banner">
+    <span>🗿 MOGGING PLATFORMS IN OHIO</span>
+    <div class="platforms-tags">
+      <span class="platform-tag">🚽 Coursera</span>
+      <span class="platform-tag">💼 LinkedIn</span>
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" data-tab="controls">🔥 Rizz</button>
+    <button class="tab-btn" data-tab="stats">📊 Gyatt</button>
+    <button class="tab-btn" data-tab="soundboard">🔊 Soundboard</button>
+    <button class="tab-btn" data-tab="guide">🗿 Sigma Guide</button>
+  </div>
+
+  <!-- Tab 1: Controls -->
+  <div id="tab-controls" class="tab-pane active">
+    <!-- Master Switch -->
+    <div class="card">
+      <div class="row">
+        <label for="master-toggle">
+          <div>
+            <span>🚀 MASTER SKIBIDI AUTOPILOT</span>
+            <span class="desc">Toggle full Ohio auto-mogger engine</span>
+          </div>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="master-toggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Speed & Super Bypass -->
+    <div class="card">
+      <div class="card-title">
+        <span>🚽 Flush & Speed Mogger</span>
+        <span style="font-size:12px;">💨</span>
+      </div>
+      <div class="row">
+        <label for="bypass-toggle">
+          <div>
+            <span>⚡ SUPER SKIBIDI BYPASS</span>
+            <span class="desc">Play 1.2s then flush to end with 100% aura</span>
+          </div>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="bypass-toggle" class="switch-amber">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="speed-slider-container">
+        <div class="speed-header">
+          <span>Turbospeed Playback:</span>
+          <span id="speed-label" class="speed-val">2.0x</span>
+        </div>
+        <input type="range" id="speed-slider" min="0.5" max="16.0" step="0.5" value="2.0">
+        <div class="speed-presets">
+          <button class="speed-btn" data-speed="1.0">1x 👶 NPC</button>
+          <button class="speed-btn active" data-speed="2.0">2x 🗿 Mew</button>
+          <button class="speed-btn" data-speed="4.0">4x 🍷 Sigma</button>
+          <button class="speed-btn" data-speed="8.0">8x 👑 Chad</button>
+          <button class="speed-btn" data-speed="16.0">16x 🚽 SKIBIDI</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation & Focus -->
+    <div class="card">
+      <div class="card-title">
+        <span>⏭️ Fanum Tax Progression</span>
+        <span style="font-size:12px;">🍕</span>
+      </div>
+      <div class="row">
+        <label for="navigate-toggle">
+          <div>
+            <span>⏭️ Auto-Advance Next Item</span>
+            <span class="desc">Mog forward to next lesson automatically</span>
+          </div>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="navigate-toggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div style="margin-top: 8px;">
+        <span class="input-label">Select Sigma Focus Mode:</span>
+        <select id="focus-mode-select">
+          <option value="all">🎯 Mog Every Single Lesson (Complete All)</option>
+          <option value="incomplete_only">⚡ Skip The Yap (Incomplete Items Only)</option>
+          <option value="videos_only">🎬 Skibidi Videos Only (Skip All Quizzes)</option>
+          <option value="quizzes_only">🧠 200 IQ Quizzes Only (Let AI Cook)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- AI Quiz Solver -->
+    <div class="card">
+      <div class="card-title">
+        <span>🧠 999+ Aura AI Quiz Cooker</span>
+        <span style="font-size:12px;">✨</span>
+      </div>
+      <div class="row">
+        <label for="quiz-toggle">
+          <div>
+            <span>🧠 Auto-Solve Quizzes & Tests</span>
+            <span class="desc">Baby Gronk approved AI auto-cooker</span>
+          </div>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="quiz-toggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div style="margin-top: 8px;">
+        <span class="input-label">AI Rizz Provider:</span>
+        <select id="ai-provider-select">
+          <option value="gemini">Google Gemini 2.5 Flash (GigaChad)</option>
+          <option value="groq">Groq Cloud (Light-Speed Rizzler)</option>
+          <option value="openrouter">OpenRouter (Multiverse Brainrot)</option>
+          <option value="nvidia">NVIDIA NIM (Ray-Traced Sigma)</option>
+        </select>
+      </div>
+
+      <div class="input-group" id="group-gemini">
+        <span class="input-label">Gemini Secret Sauce (API Key):</span>
+        <div class="input-wrapper">
+          <input type="password" id="key-gemini" placeholder="AIzaSy... (Paste Gemini Key)">
+          <button type="button" class="toggle-visibility" data-target="key-gemini">👁️</button>
+        </div>
+      </div>
+
+      <div class="input-group" id="group-groq" style="display: none;">
+        <span class="input-label">Groq Secret Sauce (API Key):</span>
+        <div class="input-wrapper">
+          <input type="password" id="key-groq" placeholder="gsk_... (Paste Groq Key)">
+          <button type="button" class="toggle-visibility" data-target="key-groq">👁️</button>
+        </div>
+      </div>
+
+      <div class="input-group" id="group-openrouter" style="display: none;">
+        <span class="input-label">OpenRouter Secret Sauce (API Key):</span>
+        <div class="input-wrapper">
+          <input type="password" id="key-openrouter" placeholder="sk-or-... (Paste OpenRouter Key)">
+          <button type="button" class="toggle-visibility" data-target="key-openrouter">👁️</button>
+        </div>
+      </div>
+
+      <div class="input-group" id="group-nvidia" style="display: none;">
+        <span class="input-label">NVIDIA Secret Sauce (API Key):</span>
+        <div class="input-wrapper">
+          <input type="password" id="key-nvidia" placeholder="nvapi-... (Paste NVIDIA Key)">
+          <button type="button" class="toggle-visibility" data-target="key-nvidia">👁️</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 2: Activity & Stats -->
+  <div id="tab-stats" class="tab-pane">
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-number" id="stat-videos">0</div>
+        <div class="stat-label">Videos Mogged 🚽</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" id="stat-quizzes">0</div>
+        <div class="stat-label">Quizzes Cooked 🧠</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" id="stat-time">0m</div>
+        <div class="stat-label">Time Saved ⏳</div>
+      </div>
+    </div>
+
+    <!-- Meme stickers gallery -->
+    <div class="card">
+      <div class="card-title">📸 Skibidi Wall of Rizz</div>
+      <div class="meme-gallery">
+        <div class="meme-thumb" title="Skibidi Toilet Rizzler"><img src="assets/skibidi_toilet.jpg"></div>
+        <div class="meme-thumb" title="GigaChad What The Sigma"><img src="assets/skibidi_gigachad.jpg"></div>
+        <div class="meme-thumb" title="Skibidi vs Cameraman"><img src="assets/skibidi_battle.jpg"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🚽 Live Brainrot Activity Feed</div>
+      <div class="log-container" id="log-list">
+        <div class="log-entry"><span class="log-time">[Ohio Ready]</span> Skibidi AutoPilot by Divyanshu Rai loaded no cap fr fr! 🔥</div>
+      </div>
+      <button class="clear-log-btn" id="btn-clear-log">Flush The Feed 🚽</button>
+    </div>
+  </div>
+
+  <!-- Tab 3: Soundboard -->
+  <div id="tab-soundboard" class="tab-pane">
+    <div class="card">
+      <div class="card-title">🔊 Skibidi Cringe Soundboard</div>
+      <div class="card-subtitle">Synthesizer audio directly in your browser! Click for peak cringe.</div>
+      <div class="soundboard-grid">
+        <button class="sound-btn" id="snd-anthem">🚽 Dop Dop Yes</button>
+        <button class="sound-btn" id="snd-sigma">🗿 What The Sigma</button>
+        <button class="sound-btn" id="snd-flush">🚿 Mega Flush</button>
+        <button class="sound-btn" id="snd-fanum">🍕 Fanum Tax</button>
+        <button class="sound-btn" id="snd-gyatt">🍑 Level 10 Gyatt</button>
+        <button class="sound-btn" id="snd-mewing">🤫 Shh Mewing</button>
+      </div>
+      <div style="margin-top: 10px; font-size: 10.5px; color: #4ade80; text-align: center;">
+        ✨ Sound synthesized live via Web Audio API! Zero lag, pure brainrot.
+      </div>
+    </div>
+
+    <div class="card" style="text-align: center;">
+      <img src="assets/skibidi_gigachad.jpg" style="width: 100%; border-radius: 8px; border: 2px solid #facc15;">
+      <div style="margin-top: 6px; font-weight: 900; color: #fde047; font-size: 12px;">
+        "WHAT THE SIGMA" - PIPE GAINS CERTIFIED 🗿🍷
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 4: Guide -->
+  <div id="tab-guide" class="tab-pane">
+    <div class="card guide-box">
+      <div class="card-title">🗿 The Sigma Rulebook</div>
+      <ol>
+        <li>Pull up any course on <b>Coursera</b> (<code>coursera.org</code>) or <b>LinkedIn Learning</b> (<code>linkedin.com/learning</code>).</li>
+        <li>The <b>Skibidi Mogger HUD</b> will pop up in the bottom-right corner like a true Ohio alpha.</li>
+        <li>Flip on <b>Super Skibidi Bypass</b> to play 1.2s and flush straight to the end with 100% checkmarks no cap.</li>
+        <li>Drop your free <b>Gemini API Key</b> to let AI cook through multiple choice quizzes while you mew.</li>
+      </ol>
+      <div class="card-title" style="margin-top: 12px;">⌨️ Keyboard Shortcuts</div>
+      <p style="margin-bottom: 4px;"><span class="hotkey-badge">[</span> or <span class="hotkey-badge">{</span> : Decrease speed (-0.5x mewing)</p>
+      <p style="margin-bottom: 4px;"><span class="hotkey-badge">]</span> or <span class="hotkey-badge">}</span> : Increase speed (+0.5x mogging)</p>
+      <p><span class="hotkey-badge">\</span> or <span class="hotkey-badge">|</span> : Toggle Super Skibidi Bypass</p>
+      
+      <div class="card-title" style="margin-top: 12px;">👤 Creator & Credits</div>
+      <p style="font-size: 11px; color: #cbd5e1;">
+        Engineered with infinite rizz by <b>Divyanshu Rai</b><br>
+        GitHub: <a href="https://github.com/harmless-bot" target="_blank" style="color: #ec4899; font-weight: bold;">https://github.com/harmless-bot</a><br>
+        Certified 100% Brainrot & Open Source (MIT)
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-watermark">
+    🚽 Skibidi AutoPilot 3000 • Only in Ohio • No Cap Fr Fr
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

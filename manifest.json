@@ -1,0 +1,76 @@
+{
+  "manifest_version": 3,
+  "name": "🚽 Skibidi AutoPilot: Brainrot Course Mogger",
+  "short_name": "Skibidi AutoPilot",
+  "version": "2.0.0",
+  "description": "The ultimate cringe Skibidi Toilet course completion engine for Coursera & LinkedIn Learning. Engineered by Divyanshu Rai (@harmless-bot) in Ohio no cap fr fr.",
+  "homepage_url": "https://github.com/harmless-bot",
+  "author": "Divyanshu Rai",
+  "permissions": [
+    "storage",
+    "alarms",
+    "tabs"
+  ],
+  "host_permissions": [
+    "*://*.coursera.org/*",
+    "*://*.linkedin.com/*",
+    "*://*.licdn.com/*",
+    "https://generativelanguage.googleapis.com/*",
+    "https://api.groq.com/*",
+    "https://openrouter.ai/*",
+    "https://integrate.api.nvidia.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.coursera.org/*",
+        "*://*.linkedin.com/*"
+      ],
+      "js": ["main_world.js"],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.coursera.org/*",
+        "*://*.linkedin.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "main_world.js",
+        "assets/skibidi_toilet.jpg",
+        "assets/skibidi_gigachad.jpg",
+        "assets/skibidi_battle.jpg",
+        "icons/icon128.png",
+        "icons/icon48.png"
+      ],
+      "matches": [
+        "*://*.coursera.org/*",
+        "*://*.linkedin.com/*"
+      ]
+    }
+  ]
+}
